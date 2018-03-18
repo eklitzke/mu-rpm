@@ -19,6 +19,7 @@ Patch2:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0002-gui
 
 BuildRequires: autoconf
 BuildRequires: automake
+BuildRequires: libtool
 BuildRequires: m4
 BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
@@ -37,7 +38,7 @@ BuildRequires: texinfo
 Requires:      gnuplot
 Requires:      guile
 Requires:      mu = %{version}-%{release}
-Supplements:   mu = %{version}-%{release}
+Enhances:      mu = %{version}-%{release}
 
 %description guile
 guile bindings for mu
@@ -121,7 +122,7 @@ fi
 
 %changelog
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-5
-- Install the guile scrips to the correct location.
+- Install the guile scripts to the correct location.
 
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-4
 - Fix link to mu4e-about.org
