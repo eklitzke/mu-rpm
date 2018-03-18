@@ -6,9 +6,9 @@
 
 Name:    mu
 Version: 1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: mu: maildir indexing service
-Group:   Applications/System
+Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/%{name}/
 Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
@@ -21,6 +21,17 @@ Requires:      emacs-filesystem >= %{emacs_version}
 
 %description
 mu mail indexing service
+
+%package guile
+Summary:       Guile language bindings for mu
+Group:         Applications/Internet
+BuildRequires: guile-devel
+BuildRequires: texinfo
+Requires:      guile
+Requires:      mu = %{version}-%{release}
+
+%description guile
+guile bindings for mu
 
 %package -n emacs-mu4e
 Summary:       GNU Emacs support for mu
@@ -39,7 +50,7 @@ emacs support for mu
 %setup -q -n %{name}-%{version}
 
 %build
-%configure --disable-gtk --disable-webkit --disable-guile
+%configure --disable-gtk --disable-webkit
 %make_build
 
 %check
@@ -48,9 +59,15 @@ make check || true
 
 %install
 make install DESTDIR=%{buildroot}
+
+# fix up mu4e texinfo docs
 gzip -9 <mu4e/mu4e.info >%{buildroot}%{_infodir}/mu4e.info.gz
 rm -f %{buildroot}%{_datadir}/doc/mu/mu4e-about.org
 rm -f %{buildroot}%{_infodir}/dir
+
+# fix where guile stuff goes
+mkdir -p %{buildroot}%{_datadir}/guile/site/2.0/mu
+mv %{buildroot}%{_datadir}/mu/scripts/*.scm %{buildroot}%{_datadir}/guile/site/2.0/mu/
 
 %clean
 rm -rf %{buildroot}
@@ -63,13 +80,29 @@ if [ "$1" = 0 ]; then
   /sbin/install-info --delete %{_infodir}/mu4e.info.gz %{_infodir}/dir
 fi
 
+%post guile
+/sbin/install-info %{_infodir}/mu-guile.info.gz %{_infodir}/dir
+
+%preun guile
+if [ "$1" = 0 ]; then
+  /sbin/install-info --delete %{_infodir}/mu-guile.info.gz %{_infodir}/dir
+fi
+
 %files
+%defattr(-,root,root)
 %doc AUTHORS NEWS NEWS.org README
 %license COPYING
 %{_bindir}/mu
 %{_mandir}/man1/mu*.gz
 %{_mandir}/man5/mu*.gz
 %{_mandir}/man7/mu*.gz
+
+%files guile
+%license COPYING
+%{_libdir}/libguile-mu.*
+%{_datadir}/guile/site/2.0/mu/*
+%{_datadir}/guile/site/2.0/mu.scm
+%{_infodir}/mu-guile.info.gz
 
 %files -n emacs-mu4e
 %doc AUTHORS NEWS NEWS.org README mu4e/mu4e-about.org
@@ -78,6 +111,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-3
+- Add mu-guile package
+
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-2
 - Clean up some minor packaging errors
 
