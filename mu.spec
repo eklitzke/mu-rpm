@@ -6,12 +6,14 @@
 
 Name:    mu
 Version: 1.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/%{name}/
 Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+
+Patch1:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0001-mu4e-doc-dir.patch
 
 BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
@@ -48,6 +50,7 @@ emacs support for mu
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch1 -p1
 
 %build
 %configure --disable-gtk --disable-webkit
@@ -111,6 +114,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-4
+- Fix link to mu4e-about.org
+
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-3
 - Add mu-guile package
 
