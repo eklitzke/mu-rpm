@@ -58,29 +58,3 @@ index f4b8b875..e8a88157 100644
  
  scm_DATA=		\
  	stats.scm	\
-diff --git a/www/mu-guile.md b/www/mu-guile.md
-index 168afc30..a8f16ce7 100644
---- a/www/mu-guile.md
-+++ b/www/mu-guile.md
-@@ -32,7 +32,7 @@ the `GUILE_LOAD_PATH` to the directory with the installed `mu.scm`,
- e.g.
- 
- ``` sh
--   export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
-+   export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
- ```
- 
- (you need to adapt this if you installed `mu` in some non-standard place; but
-diff --git a/www/mu-guile.org b/www/mu-guile.org
-index de6ad7db..87522c12 100644
---- a/www/mu-guile.org
-+++ b/www/mu-guile.org
-@@ -24,7 +24,7 @@
-    ~GUILE_LOAD_PATH~ to the directory with the installed ~mu.scm~, e.g.
- 
- #+begin_src sh
--   export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
-+   export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
- #+end_src
- 
-    (you need to adapt this if you installed =mu= in some non-standard place; but
