@@ -1,0 +1,86 @@
+diff --git a/contrib/mu.spec b/contrib/mu.spec
+index 1ed66d4e..bf521f70 100644
+--- a/contrib/mu.spec
++++ b/contrib/mu.spec
+@@ -120,8 +120,8 @@ fi
+ 
+ %files guile
+ %{_libdir}/libguile-mu.*
+-%{_datadir}/guile/site/2.0/mu/*
+-%{_datadir}/guile/site/2.0/mu.scm
++%{_datadir}/guile/2.0/mu/*
++%{_datadir}/guile/2.0/mu.scm
+ %{_infodir}/mu-guile.info.gz
+ 
+ %changelog
+diff --git a/guile/Makefile.am b/guile/Makefile.am
+index 32c11dee..b083e47b 100644
+--- a/guile/Makefile.am
++++ b/guile/Makefile.am
+@@ -64,7 +64,7 @@ SUFFIXES = .x .doc
+ 
+ # FIXME: GUILE_SITEDIR would be better, but that
+ # breaks 'make distcheck'
+-scmdir=${prefix}/share/guile/site/2.0/
++scmdir=${prefix}/share/guile/2.0/
+ scm_DATA=mu.scm
+ 
+ EXTRA_DIST=$(scm_DATA)
+diff --git a/guile/mu-guile.texi b/guile/mu-guile.texi
+index bcc659d0..10602686 100644
+--- a/guile/mu-guile.texi
++++ b/guile/mu-guile.texi
+@@ -176,12 +176,12 @@ If necessary, you can add the @t{%load-path} by adding to your
+ @file{~/.guile}:
+ 
+ @lisp
+-(set! %load-path (cons "/usr/local/share/guile/site/2.0" %load-path))
++(set! %load-path (cons "/usr/local/share/guile/2.0" %load-path))
+ @end lisp
+ 
+ Or, alternatively, you can set @t{GUILE_LOAD_PATH}:
+ @example
+-export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
++export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
+ @end example
+ 
+ In both cases the directory should be the directory that contains the
+diff --git a/guile/mu/Makefile.am b/guile/mu/Makefile.am
+index f4b8b875..e8a88157 100644
+--- a/guile/mu/Makefile.am
++++ b/guile/mu/Makefile.am
+@@ -18,7 +18,7 @@ include $(top_srcdir)/gtest.mk
+ 
+ # FIXME: GUILE_SITEDIR would be better, but that
+ # breaks 'make distcheck'
+-scmdir=${prefix}/share/guile/site/2.0/mu/
++scmdir=${prefix}/share/guile/2.0/mu/
+ 
+ scm_DATA=		\
+ 	stats.scm	\
+diff --git a/www/mu-guile.md b/www/mu-guile.md
+index 168afc30..a8f16ce7 100644
+--- a/www/mu-guile.md
++++ b/www/mu-guile.md
+@@ -32,7 +32,7 @@ the `GUILE_LOAD_PATH` to the directory with the installed `mu.scm`,
+ e.g.
+ 
+ ``` sh
+-   export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
++   export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
+ ```
+ 
+ (you need to adapt this if you installed `mu` in some non-standard place; but
+diff --git a/www/mu-guile.org b/www/mu-guile.org
+index de6ad7db..87522c12 100644
+--- a/www/mu-guile.org
++++ b/www/mu-guile.org
+@@ -24,7 +24,7 @@
+    ~GUILE_LOAD_PATH~ to the directory with the installed ~mu.scm~, e.g.
+ 
+ #+begin_src sh
+-   export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
++   export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
+ #+end_src
+ 
+    (you need to adapt this if you installed =mu= in some non-standard place; but
