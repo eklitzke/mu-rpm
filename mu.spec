@@ -13,8 +13,6 @@ License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/%{name}/
 Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 
-#BuildRequires: gcc
-#BuildRequires: pkgconfig
 BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
 Requires:      gmime
