@@ -17,6 +17,9 @@ Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%
 Patch1:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0001-mu4e-doc-dir.patch
 Patch2:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0002-guile-installation-dir.patch
 
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: m4
 BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
 Requires:      gmime
@@ -58,6 +61,7 @@ emacs support for mu
 %patch2 -p1
 
 %build
+./autogen.sh  # needed because we patched automakefiles
 %configure --disable-gtk --disable-webkit
 %make_build
 
