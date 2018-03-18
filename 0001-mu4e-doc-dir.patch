@@ -1,0 +1,13 @@
+diff --git a/configure.ac b/configure.ac
+index d44f6bb..4cd2d6f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -253,7 +253,7 @@ AM_CONDITIONAL(HAVE_MAKEINFO, [test "x$have_makeinfo" = "xyes"])
+ 
+ ###############################################################################
+ # docdir, so we can use it in mu4e-meta.el.in
+-AC_SUBST(MU_DOC_DIR, "${prefix}/share/doc/mu")
++AC_SUBST(MU_DOC_DIR, "${prefix}/share/doc/emacs-mu4e")
+ ###############################################################################
+ 
+ 
