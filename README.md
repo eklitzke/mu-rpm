@@ -13,5 +13,6 @@ directories).
 The `emacs-mu4e` package installs the Emacs mu4e package, which is a mail reader
 for Emacs.
 
-The `mu-guile` package installs Scheme language bindings for Guile. This is
-useful if you want to interact with the mu database from Scheme.
+The `mu-guile` package installs Scheme language bindings for Guile. These
+provide additional `mu script` commands, and I recommend you install this
+package if you are using mu.

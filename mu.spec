@@ -3,10 +3,11 @@
 %else
 %define emacs_version %(pkg-config emacs --modversion)
 %endif
+%define guiledir %{_datadir}/guile/2.0
 
 Name:    mu
 Version: 1.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -14,6 +15,7 @@ URL:     https://www.djcbsoftware.nl/code/%{name}/
 Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 
 Patch1:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0001-mu4e-doc-dir.patch
+Patch2:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0002-guile-installation-dir.patch
 
 BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
@@ -29,8 +31,10 @@ Summary:       Guile language bindings for mu
 Group:         Applications/Internet
 BuildRequires: guile-devel
 BuildRequires: texinfo
+Requires:      gnuplot
 Requires:      guile
 Requires:      mu = %{version}-%{release}
+Supplements:   mu = %{version}-%{release}
 
 %description guile
 guile bindings for mu
@@ -51,6 +55,7 @@ emacs support for mu
 %prep
 %setup -q -n %{name}-%{version}
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure --disable-gtk --disable-webkit
@@ -67,10 +72,6 @@ make install DESTDIR=%{buildroot}
 gzip -9 <mu4e/mu4e.info >%{buildroot}%{_infodir}/mu4e.info.gz
 rm -f %{buildroot}%{_datadir}/doc/mu/mu4e-about.org
 rm -f %{buildroot}%{_infodir}/dir
-
-# fix where guile stuff goes
-mkdir -p %{buildroot}%{_datadir}/guile/site/2.0/mu
-mv %{buildroot}%{_datadir}/mu/scripts/*.scm %{buildroot}%{_datadir}/guile/site/2.0/mu/
 
 %clean
 rm -rf %{buildroot}
@@ -103,8 +104,9 @@ fi
 %files guile
 %license COPYING
 %{_libdir}/libguile-mu.*
-%{_datadir}/guile/site/2.0/mu/*
-%{_datadir}/guile/site/2.0/mu.scm
+%{guiledir}/mu.scm
+%{guiledir}/mu/*.scm
+%{_datadir}/mu/scripts/*.scm
 %{_infodir}/mu-guile.info.gz
 
 %files -n emacs-mu4e
@@ -114,6 +116,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-5
+- Install the guile scrips to the correct location.
+
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-4
 - Fix link to mu4e-about.org
 
