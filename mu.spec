@@ -7,7 +7,7 @@
 
 Name:    mu
 Version: 1.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -121,6 +121,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Wed Jun 06 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-6
+- Bump spec for Emacs 26.1
+
 * Sun Mar 18 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-5
 - Install the guile scripts to the correct location.
 
