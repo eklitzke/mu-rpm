@@ -7,7 +7,7 @@
 
 Name:    mu
 Version: 1.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -19,13 +19,15 @@ Patch2:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0002-gui
 
 BuildRequires: autoconf
 BuildRequires: automake
+BuildRequires: gcc-c++
+BuildRequires: gmime-devel
 BuildRequires: libtool
 BuildRequires: m4
-BuildRequires: gmime-devel
 BuildRequires: xapian-core-devel
+
+Requires:      emacs-filesystem >= %{emacs_version}
 Requires:      gmime
 Requires:      xapian-core-libs
-Requires:      emacs-filesystem >= %{emacs_version}
 
 %description
 mu mail indexing service
@@ -121,6 +123,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sat Oct 20 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-7
+- Rebuilt for Fedora 29
+
 * Wed Jun 06 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-6
 - Bump spec for Emacs 26.1
 
