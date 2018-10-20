@@ -5,17 +5,17 @@
 %endif
 %define guiledir %{_datadir}/guile/2.0
 
-Name:    mu
+Name:    mu-mail
 Version: 1.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
-URL:     https://www.djcbsoftware.nl/code/%{name}/
-Source0: https://github.com/djcb/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+URL:     https://www.djcbsoftware.nl/code/mu/
+Source0: https://github.com/djcb/mu/releases/download/v1.0/mu-1.0.tar.xz
 
-Patch1:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0001-mu4e-doc-dir.patch
-Patch2:  https://raw.githubusercontent.com/eklitzke/copr-%{name}/master/0002-guile-installation-dir.patch
+Patch1:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0001-mu4e-doc-dir.patch
+Patch2:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0002-guile-installation-dir.patch
 
 BuildRequires: autoconf
 BuildRequires: automake
@@ -39,8 +39,8 @@ BuildRequires: guile-devel
 BuildRequires: texinfo
 Requires:      gnuplot
 Requires:      guile
-Requires:      mu = %{version}-%{release}
-Enhances:      mu = %{version}-%{release}
+Requires:      %{name} = %{version}-%{release}
+Enhances:      %{name} = %{version}-%{release}
 
 %description guile
 guile bindings for mu
@@ -59,7 +59,7 @@ Requires:      %{name} = %{version}-%{release}
 emacs support for mu
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n mu-%{version}
 %patch1 -p1
 %patch2 -p1
 
@@ -78,6 +78,7 @@ make install DESTDIR=%{buildroot}
 # fix up mu4e texinfo docs
 gzip -9 <mu4e/mu4e.info >%{buildroot}%{_infodir}/mu4e.info.gz
 rm -f %{buildroot}%{_datadir}/doc/mu/mu4e-about.org
+rm -f %{buildroot}%{_datadir}/doc/mu/NEWS.org
 rm -f %{buildroot}%{_infodir}/dir
 
 %clean
@@ -123,6 +124,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sat Oct 20 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-9
+- Rename package to mu-mail to avoid conflict with upstream mu package
+
 * Sat Oct 20 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-7
 - Rebuilt for Fedora 29
 
