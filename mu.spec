@@ -10,7 +10,7 @@
 %define gitdate   20190218
 
 Name:    mu-mail
-Version: 1.0
+Version: 1.1.0
 Release: git%{gitdate}%{?dist}.1
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
@@ -128,7 +128,7 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
-* Mon Feb 18 2019 Evan Klitzke <evan@eklitzke.org> - 1.0-git20190218.1
+* Mon Feb 18 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190218.1
 - Update for changes in master; notably this updates to gmime30 and guile22
 
 * Sat Oct 20 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-9
