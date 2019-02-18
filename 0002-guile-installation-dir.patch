@@ -1,60 +1,56 @@
-diff --git a/contrib/mu.spec b/contrib/mu.spec
-index 1ed66d4e..bf521f70 100644
---- a/contrib/mu.spec
-+++ b/contrib/mu.spec
-@@ -120,8 +120,8 @@ fi
- 
+diff -bru mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/contrib/mu.spec mu-9bffb465bdd1a4ba737d5977391717751f5beb07/contrib/mu.spec
+--- mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/contrib/mu.spec	2019-02-17 22:30:55.000000000 -0800
++++ mu-9bffb465bdd1a4ba737d5977391717751f5beb07/contrib/mu.spec	2019-02-18 12:17:26.291238519 -0800
+@@ -120,8 +120,8 @@
+
  %files guile
  %{_libdir}/libguile-mu.*
 -%{_datadir}/guile/site/2.0/mu/*
 -%{_datadir}/guile/site/2.0/mu.scm
-+%{_datadir}/guile/2.0/mu/*
-+%{_datadir}/guile/2.0/mu.scm
++%{_datadir}/guile/2.2/mu/*
++%{_datadir}/guile/2.2/mu.scm
  %{_infodir}/mu-guile.info.gz
- 
+
  %changelog
-diff --git a/guile/Makefile.am b/guile/Makefile.am
-index 32c11dee..b083e47b 100644
---- a/guile/Makefile.am
-+++ b/guile/Makefile.am
-@@ -64,7 +64,7 @@ SUFFIXES = .x .doc
- 
+diff -bru mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/Makefile.am mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/Makefile.am
+--- mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/Makefile.am	2019-02-17 22:30:55.000000000 -0800
++++ mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/Makefile.am	2019-02-18 12:17:58.712462720 -0800
+@@ -66,7 +66,7 @@
+
  # FIXME: GUILE_SITEDIR would be better, but that
  # breaks 'make distcheck'
 -scmdir=${prefix}/share/guile/site/2.0/
-+scmdir=${prefix}/share/guile/2.0/
++scmdir=${prefix}/share/guile/2.2/
  scm_DATA=mu.scm
- 
+
  EXTRA_DIST=$(scm_DATA)
-diff --git a/guile/mu-guile.texi b/guile/mu-guile.texi
-index bcc659d0..10602686 100644
---- a/guile/mu-guile.texi
-+++ b/guile/mu-guile.texi
-@@ -176,12 +176,12 @@ If necessary, you can add the @t{%load-path} by adding to your
- @file{~/.guile}:
- 
- @lisp
--(set! %load-path (cons "/usr/local/share/guile/site/2.0" %load-path))
-+(set! %load-path (cons "/usr/local/share/guile/2.0" %load-path))
- @end lisp
- 
- Or, alternatively, you can set @t{GUILE_LOAD_PATH}:
- @example
--export GUILE_LOAD_PATH="/usr/local/share/guile/site/2.0"
-+export GUILE_LOAD_PATH="/usr/local/share/guile/2.0"
- @end example
- 
- In both cases the directory should be the directory that contains the
-diff --git a/guile/mu/Makefile.am b/guile/mu/Makefile.am
-index f4b8b875..e8a88157 100644
---- a/guile/mu/Makefile.am
-+++ b/guile/mu/Makefile.am
-@@ -18,7 +18,7 @@ include $(top_srcdir)/gtest.mk
- 
+diff -bru mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/mu/Makefile.am mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/mu/Makefile.am
+--- mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/mu/Makefile.am	2019-02-17 22:30:55.000000000 -0800
++++ mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/mu/Makefile.am	2019-02-18 12:19:02.719983858 -0800
+@@ -18,7 +18,7 @@
+
  # FIXME: GUILE_SITEDIR would be better, but that
  # breaks 'make distcheck'
 -scmdir=${prefix}/share/guile/site/2.0/mu/
-+scmdir=${prefix}/share/guile/2.0/mu/
- 
++scmdir=${prefix}/share/guile/2.2/mu/
+
  scm_DATA=		\
  	stats.scm	\
+diff -bru mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/mu-guile.texi mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/mu-guile.texi
+--- mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/guile/mu-guile.texi	2019-02-17 22:30:55.000000000 -0800
++++ mu-9bffb465bdd1a4ba737d5977391717751f5beb07/guile/mu-guile.texi	2019-02-18 12:18:46.500841568 -0800
+@@ -176,12 +176,12 @@
+ @file{~/.guile}:
+
+ @lisp
+-(set! %load-path (cons "/usr/local/share/guile/site/2.0" %load-path))
++(set! %load-path (cons "/usr/local/share/guile/2.2" %load-path))
+ @end lisp
+
+ Or, alternatively, you can set @t{GUILE_LOAD_PATH}:
+ @example
+-export GUILE_LOAD_PATH=/usr/local/share/guile/site/2.0
++export GUILE_LOAD_PATH=/usr/local/share/guile/2.2
+ @end example
+
+ In both cases the directory should be the directory that contains the

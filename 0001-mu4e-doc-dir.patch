@@ -1,8 +1,7 @@
-diff --git a/configure.ac b/configure.ac
-index d44f6bb..4cd2d6f 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -253,7 +253,7 @@ AM_CONDITIONAL(HAVE_MAKEINFO, [test "x$have_makeinfo" = "xyes"])
+diff -ru mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/configure.ac mu-9bffb465bdd1a4ba737d5977391717751f5beb07/configure.ac
+--- mu-9bffb465bdd1a4ba737d5977391717751f5beb07-orig/configure.ac	2019-02-17 22:30:55.000000000 -0800
++++ mu-9bffb465bdd1a4ba737d5977391717751f5beb07/configure.ac	2019-02-18 12:14:31.095069841 -0800
+@@ -256,7 +256,7 @@
  
  ###############################################################################
  # docdir, so we can use it in mu4e-meta.el.in
@@ -10,4 +9,4 @@ index d44f6bb..4cd2d6f 100644
 +AC_SUBST(MU_DOC_DIR, "${prefix}/share/doc/emacs-mu4e")
  ###############################################################################
  
- 
+ ###############################################################################

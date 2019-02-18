@@ -3,16 +3,20 @@
 %else
 %define emacs_version %(pkg-config emacs --modversion)
 %endif
-%define guiledir %{_datadir}/guile/2.0
+%define guiledir %{_datadir}/guile/2.2
+
+# The full git commit to use, and the date of the commit.
+%define gitcommit 9bffb465bdd1a4ba737d5977391717751f5beb07
+%define gitdate   20190218
 
 Name:    mu-mail
 Version: 1.0
-Release: 8%{?dist}
+Release: git%{gitdate}%{?dist}.1
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/mu/
-Source0: https://github.com/djcb/mu/releases/download/v1.0/mu-1.0.tar.xz
+Source0: https://github.com/djcb/mu/archive/%{gitcommit}.zip
 
 Patch1:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0001-mu4e-doc-dir.patch
 Patch2:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0002-guile-installation-dir.patch
@@ -20,13 +24,13 @@ Patch2:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0002-guile-in
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: gcc-c++
-BuildRequires: gmime-devel
+BuildRequires: gmime30-devel
 BuildRequires: libtool
 BuildRequires: m4
 BuildRequires: xapian-core-devel
 
 Requires:      emacs-filesystem >= %{emacs_version}
-Requires:      gmime
+Requires:      gmime30
 Requires:      xapian-core-libs
 
 %description
@@ -35,10 +39,10 @@ mu mail indexing service
 %package guile
 Summary:       Guile language bindings for mu
 Group:         Applications/Internet
-BuildRequires: guile-devel
+BuildRequires: guile22-devel
 BuildRequires: texinfo
 Requires:      gnuplot
-Requires:      guile
+Requires:      guile22
 Requires:      %{name} = %{version}-%{release}
 Enhances:      %{name} = %{version}-%{release}
 
@@ -59,7 +63,7 @@ Requires:      %{name} = %{version}-%{release}
 emacs support for mu
 
 %prep
-%setup -q -n mu-%{version}
+%setup -q -n mu-%{gitcommit}
 %patch1 -p1
 %patch2 -p1
 
@@ -124,6 +128,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Mon Feb 18 2019 Evan Klitzke <evan@eklitzke.org> - 1.0-git20190218.1
+- Update for changes in master; notably this updates to gmime30 and guile22
+
 * Sat Oct 20 2018 Evan Klitzke <evan@eklitzke.org> - 1.0-9
 - Rename package to mu-mail to avoid conflict with upstream mu package
 
