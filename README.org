@@ -1,0 +1,30 @@
+* RPM Packaging For mu & mu4e
+
+This is my RPM package for [[http://www.djcbsoftware.nl/code/mu/][mu]] and the closely related [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] Emacs mail client.
+This is a little different from the one in the upstream =contrib= directory of
+mu, mostly I've tried to modernize the RPM packages.
+
+The spec file (or SPRM) will build three packages: =mu-mail=, =mu-guile=, and
+=emacs-mu4e=.
+
+You almost certainly want to install the =mu-mail= and =emacs-mu4e= packages.
+The =mu-guile= is a little more special purpose, and really only useful if you
+want to write [[https://www.gnu.org/software/guile/][Guile Scheme]] scripts to interact with =mu=.
+
+** Installing Pre-built RPMs from COPR
+
+   You can find the packages I've built on my [[https://copr.fedorainfracloud.org/coprs/eklitzke/mu/][Fedora Copr]]. Just follow the
+   instructions there and set it up as you would any other COPR repository.
+
+** Building Your Own RPMs
+
+   The process isn't any different from any other package. For the uninitiated,
+   the process is roughly like this:
+
+#+BEGIN_SRC bash
+  # download upstream tarball, patches, etc.
+  $ spectool -g -R mu.spec
+
+  # build the package
+  $ rpmbuild -ba mu.spec
+#+END_SRC
