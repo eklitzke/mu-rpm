@@ -1,10 +1,11 @@
 * RPM Packaging For mu & mu4e
 
-This is my RPM package for [[http://www.djcbsoftware.nl/code/mu/][mu]] and the closely related [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] Emacs mail client.
-This is a little different from the one in the upstream =contrib= directory of
-mu, mostly I've tried to modernize the RPM packages.
+This is my RPM package for [[http://www.djcbsoftware.nl/code/mu/][mu]] and its sister project, the [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] Emacs mail
+client. This is a little different from the existing RPM packaging in the
+upstream =contrib= directory of mu, mostly I've tried to modernize the RPM
+package.
 
-The spec file (or SPRM) will build three packages: =mu-mail=, =mu-guile=, and
+The spec file will build three packages: =mu-mail=, =mu-guile=, and
 =emacs-mu4e=.
 
 You almost certainly want to install the =mu-mail= and =emacs-mu4e= packages.
@@ -25,6 +26,26 @@ want to write [[https://www.gnu.org/software/guile/][Guile Scheme]] scripts to i
   # download upstream tarball, patches, etc.
   $ spectool -g -R mu.spec
 
+  # ensure you have all build dependencies
+  $ sudo dnf builddep mu.spec
+
   # build the package
-  $ rpmbuild -ba mu.spec
+  $ pushd ~/rpmbuild/SPECS; rpmbuild -ba mu.spec
+
+  # rpm files should now be in ~/rpmbuild/RPMS and ~/rpmbuild/SRPMS
+  $ ls -l ../RPMS/x86_64/mu-*
+
+  # OPTIONAL: install an rpm
+  $ sudo dnf install ../RPMS/x86_64/mu-WHATEVER-RPM-YOU-WISH.rpm
+
+  # return to your original directory
+  $ popd
 #+END_SRC
+
+  There will also be an SRPM build in =~/rpmbuild/SRPMS=
+
+** Bumping The Spec File With Upstream Changes
+
+   There is an experimental script =update-specfile.sh= that you can use to try
+   to automatically bump the =mu.spec= specfile to match the upstream git master
+   branch. You should review any changes it makes before committing them.

@@ -1,1 +1,4 @@
-mu-*
+*.rpm
+*.tar.gz
+*.zip
+mu-*/

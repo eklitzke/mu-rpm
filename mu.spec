@@ -128,7 +128,7 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
-* Feb 25 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190225.1
+* Mon Feb 25 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190225.1
 - Auto update with changes in master, new git commit 31f73b32
 
 * Mon Feb 18 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190218.1
