@@ -1,22 +1,24 @@
+# If the emacs-common package has installed a pkgconfig file, use that to
+# determine install locations and Emacs version at build time, otherwise set
+# defaults.
 %if %($(pkg-config emacs) ; echo $?)
 %define emacs_version 24.4
 %else
 %define emacs_version %(pkg-config emacs --modversion)
 %endif
-%define guiledir %{_datadir}/guile/2.2
 
-# The full git commit to use, and the date of the commit.
-%define gitcommit 51be30ada9cf0097c3303bd4eb58d8cbed99f577
-%define gitdate   20190324
+%define guiledir %{_datadir}/guile/2.2
+%define baseversion 1.2
+%define candidate rc1
 
 Name:    mu-mail
-Version: 1.1.0
-Release: git%{gitdate}%{?dist}.1
+Version: %{baseversion}~%{candidate}
+Release: 1%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/mu/
-Source0: https://github.com/djcb/mu/archive/%{gitcommit}.zip
+Source0: https://github.com/djcb/mu/archive/%{baseversion}-%{candidate}.tar.gz
 
 Patch1:  0001-mu4e-doc-dir.patch
 Patch2:  0002-guile-installation-dir.patch
@@ -24,6 +26,7 @@ Patch2:  0002-guile-installation-dir.patch
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: emacs
+BuildRequires: emacs-common
 BuildRequires: emacs-el
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
@@ -63,7 +66,7 @@ Enhances:      %{name} = %{version}-%{release}
 emacs support for mu
 
 %prep
-%setup -q -n mu-%{gitcommit}
+%setup -q -n mu-%{baseversion}-%{candidate}
 %patch1 -p1
 %patch2 -p1
 
@@ -73,8 +76,7 @@ emacs support for mu
 %make_build
 
 %check
-# this seems to fail in a chroot in test-mu-maildir
-make check || true
+make check
 
 %install
 make install DESTDIR=%{buildroot}
@@ -128,6 +130,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Wed Mar 27 2019 Evan Klitzke <evan@eklitzke.org> - 1.2~rc1-1
+- Actually use the official 1.2-rc1 tarball
+
 * Wed Mar 27 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190324.1
 - Auto update with changes in master, new git commit 51be30ad
 

@@ -29,23 +29,13 @@ want to write [[https://www.gnu.org/software/guile/][Guile Scheme]] scripts to i
   # ensure you have all build dependencies
   $ sudo dnf builddep mu.spec
 
-  # build the package
-  $ pushd ~/rpmbuild/SPECS; rpmbuild -ba mu.spec
+  # build srpm and binary rpms
+  $ rpmbuild -ba mu.spec
 
-  # rpm files should now be in ~/rpmbuild/RPMS and ~/rpmbuild/SRPMS
-  $ ls -l ../RPMS/x86_64/mu-*
+  # now you should have srpms and binary rpms
+  $ ls -l ~/rpmbuild/SRPMS/mu-mail*.srpm
+  $ ls -l ~/rpmbuild/RPMS/x86_64/mu-*.rpm
 
   # OPTIONAL: install an rpm
-  $ sudo dnf install ../RPMS/x86_64/mu-WHATEVER-RPM-YOU-WISH.rpm
-
-  # return to your original directory
-  $ popd
+  $ sudo dnf install ~/rpmbuild/RPMS/x86_64/mu-WHATEVER-RPM-YOU-WISH.rpm
 #+END_SRC
-
-  There will also be an SRPM build in =~/rpmbuild/SRPMS=
-
-** Bumping The Spec File With Upstream Changes
-
-   There is an experimental script =update-specfile.sh= that you can use to try
-   to automatically bump the =mu.spec= specfile to match the upstream git master
-   branch. You should review any changes it makes before committing them.
