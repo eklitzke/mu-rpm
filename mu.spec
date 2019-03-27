@@ -19,6 +19,7 @@ BuildRequires: automake
 BuildRequires: emacs
 BuildRequires: emacs-common
 BuildRequires: emacs-el
+BuildRequires: glibc-langpack-en
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
 BuildRequires: guile22-devel
