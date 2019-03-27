@@ -1,12 +1,3 @@
-# If the emacs-common package has installed a pkgconfig file, use that to
-# determine install locations and Emacs version at build time, otherwise set
-# defaults.
-%if %($(pkg-config emacs) ; echo $?)
-%define emacs_version 24.4
-%else
-%define emacs_version %(pkg-config emacs --modversion)
-%endif
-
 %define guiledir %{_datadir}/guile/2.2
 %define baseversion 1.2
 %define candidate rc1
@@ -57,8 +48,8 @@ guile bindings for mu
 Summary:       GNU Emacs support for mu
 Group:         Applications/Editors
 BuildArch:     noarch
-Requires:      emacs(bin) >= %{emacs_version}
-Requires:      emacs-filesystem >= %{emacs_version}
+Requires:      emacs(bin) >= %{_emacs_version}
+Requires:      emacs-filesystem >= %{_emacs_version}
 Requires:      %{name} = %{version}-%{release}
 Enhances:      %{name} = %{version}-%{release}
 
