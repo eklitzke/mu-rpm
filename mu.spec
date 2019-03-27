@@ -1,5 +1,5 @@
 %if %($(pkg-config emacs) ; echo $?)
-%define emacs_version 23.0
+%define emacs_version 24.4
 %else
 %define emacs_version %(pkg-config emacs --modversion)
 %endif
@@ -18,18 +18,21 @@ License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/mu/
 Source0: https://github.com/djcb/mu/archive/%{gitcommit}.zip
 
-Patch1:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0001-mu4e-doc-dir.patch
-Patch2:  https://raw.githubusercontent.com/eklitzke/copr-mu/master/0002-guile-installation-dir.patch
+Patch1:  0001-mu4e-doc-dir.patch
+Patch2:  0002-guile-installation-dir.patch
 
 BuildRequires: autoconf
 BuildRequires: automake
+BuildRequires: emacs
+BuildRequires: emacs-el
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
+BuildRequires: guile22-devel
 BuildRequires: libtool
 BuildRequires: m4
+BuildRequires: texinfo
 BuildRequires: xapian-core-devel
 
-Requires:      emacs-filesystem >= %{emacs_version}
 Requires:      gmime30
 Requires:      xapian-core-libs
 
@@ -39,8 +42,6 @@ mu mail indexing service
 %package guile
 Summary:       Guile language bindings for mu
 Group:         Applications/Internet
-BuildRequires: guile22-devel
-BuildRequires: texinfo
 Requires:      gnuplot
 Requires:      guile22
 Requires:      %{name} = %{version}-%{release}
@@ -53,11 +54,10 @@ guile bindings for mu
 Summary:       GNU Emacs support for mu
 Group:         Applications/Editors
 BuildArch:     noarch
-BuildRequires: emacs
-BuildRequires: emacs-el
-BuildRequires: texinfo
 Requires:      emacs(bin) >= %{emacs_version}
+Requires:      emacs-filesystem >= %{emacs_version}
 Requires:      %{name} = %{version}-%{release}
+Enhances:      %{name} = %{version}-%{release}
 
 %description -n emacs-mu4e
 emacs support for mu
