@@ -67,14 +67,8 @@ emacs support for mu
 %make_build
 
 %check
-# FIXME: Sometimes (but not always!) we get errors like:
-#
-#   /mu-maildir/mu-maildir-get-new-path-new:                             **
-#   ERROR:test-mu-maildir.c:440:assert_matches_regexp: assertion failed: (0)
-#   FAIL
-#   GTester: last random seed: R02Sf3062b46e8e42e48e4d4d0e1332844e0
-#
-# So we run "make check", but ignore any errors...
+# FIXME: See https://github.com/djcb/mu/issues/1399 for why we need to force
+# this not to fail.
 make check || true
 
 %install
