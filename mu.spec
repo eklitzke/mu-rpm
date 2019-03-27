@@ -6,8 +6,8 @@
 %define guiledir %{_datadir}/guile/2.2
 
 # The full git commit to use, and the date of the commit.
-%define gitcommit f9b615c3bbe80b8afdcdae113c739ab6c1601d8e
-%define gitdate   20190302
+%define gitcommit 51be30ada9cf0097c3303bd4eb58d8cbed99f577
+%define gitdate   20190324
 
 Name:    mu-mail
 Version: 1.1.0
@@ -128,6 +128,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Wed Mar 27 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190324.1
+- Auto update with changes in master, new git commit 51be30ad
+
 * Mon Mar 04 2019 Evan Klitzke <evan@eklitzke.org> - 1.1.0-git20190302.1
 - Auto update with changes in master, new git commit f9b615c3
 
