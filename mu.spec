@@ -1,15 +1,22 @@
 %define guiledir %{_datadir}/guile/2.2
 %define baseversion 1.2
+%if 0
 %define candidate rc1
+%define version %{baseversion}~%{candidate}
+%define versionurl %{baseversion}-%{candidate}
+%else
+%define version %{baseversion}
+%define versionurl %{baseversion}
+%endif
 
 Name:    mu-mail
-Version: %{baseversion}~%{candidate}
+Version: 1.2
 Release: 1%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/mu/
-Source0: https://github.com/djcb/mu/archive/%{baseversion}-%{candidate}.tar.gz
+Source0: https://github.com/djcb/mu/archive/%{versionurl}.tar.gz
 
 Patch1:  0001-mu4e-doc-dir.patch
 Patch2:  0002-guile-installation-dir.patch
@@ -19,9 +26,11 @@ BuildRequires: automake
 BuildRequires: emacs-nox
 BuildRequires: emacs-common
 BuildRequires: emacs-el
+BuildRequires: glibc-langpack-en
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
 BuildRequires: guile22-devel
+BuildRequires: json-glib-devel
 BuildRequires: libtool
 BuildRequires: m4
 BuildRequires: texinfo
@@ -38,8 +47,9 @@ Summary:       Guile language bindings for mu
 Group:         Applications/Internet
 Requires:      gnuplot
 Requires:      guile22
-Requires:      %{name} = %{version}-%{release}
-Enhances:      %{name} = %{version}-%{release}
+Requires:      json-glib
+Requires:      %{name} = %{version}
+Enhances:      %{name} = %{version}
 
 %description guile
 guile bindings for mu
@@ -50,20 +60,20 @@ Group:         Applications/Editors
 BuildArch:     noarch
 Requires:      emacs(bin) >= %{_emacs_version}
 Requires:      emacs-filesystem >= %{_emacs_version}
-Requires:      %{name} = %{version}-%{release}
-Enhances:      %{name} = %{version}-%{release}
+Requires:      %{name} = %{version}
+Enhances:      %{name} = %{version}
 
 %description -n emacs-mu4e
 emacs support for mu
 
 %prep
-%setup -q -n mu-%{baseversion}-%{candidate}
+%setup -q -n mu-%{versionurl}
 %patch1 -p1
 %patch2 -p1
 
 %build
 ./autogen.sh  # needed because we patched automakefiles
-%configure --disable-gtk --disable-webkit
+%configure --disable-gtk --disable-webkit --disable-silent-rules
 %make_build
 
 %check
@@ -123,6 +133,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Mon May 06 2019 Evan Klitzke <evan@eklitzke.org> - 1.2-1
+- Bump to the official 1.2 release.
+
 * Wed Mar 27 2019 Evan Klitzke <evan@eklitzke.org> - 1.2~rc1-1
 - Actually use the official 1.2-rc1 tarball
 
