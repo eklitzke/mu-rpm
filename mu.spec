@@ -10,7 +10,7 @@
 %endif
 
 Name:    mu-mail
-Version: 1.2
+Version: %{version}
 Release: 1%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
