@@ -11,7 +11,7 @@
 
 Name:    mu-mail
 Version: %{version}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -47,6 +47,7 @@ Summary:       Guile language bindings for mu
 Group:         Applications/Internet
 Requires:      gnuplot
 Requires:      guile22
+Requires:      info
 Requires:      json-glib
 Requires:      %{name} = %{version}
 Enhances:      %{name} = %{version}
@@ -133,6 +134,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sat May 09 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.4-2
+- Depend on info
+
 * Sat May 09 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.4-1
 - Bump for the official 1.4.4 release.
 
