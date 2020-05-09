@@ -1,3 +1,16 @@
+diff --git a/configure.ac b/configure.ac
+index 8a7eb03f..2201f6da 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -230,7 +230,7 @@ AS_IF([test "x$enable_guile" != "xno"],[
+     GUILE_FLAGS
+     AC_DEFINE_UNQUOTED([GUILE_BINARY],"$GUILE",[guile binary])
+     AC_DEFINE(BUILD_GUILE,[1], [Do we support Guile?])
+-    AC_SUBST(GUILE_SNARF, [guile-snarf])
++    AC_SUBST(GUILE_SNARF, [guile-snarf2.2])
+     guile_version=$($PKG_CONFIG guile-2.2 --modversion)
+   ])
+ ])
 diff --git a/guile/Makefile.am b/guile/Makefile.am
 index 319b0798..10c3dbc2 100644
 --- a/guile/Makefile.am

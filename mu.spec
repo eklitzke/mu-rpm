@@ -29,7 +29,6 @@ BuildRequires: emacs-el
 BuildRequires: glibc-langpack-en
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
-BuildRequires: guile-devel
 BuildRequires: guile22-devel
 BuildRequires: json-glib-devel
 BuildRequires: libtool
