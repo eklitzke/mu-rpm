@@ -1,5 +1,5 @@
 %define guiledir %{_datadir}/guile/2.2
-%define baseversion 1.2
+%define baseversion 1.4.4
 %if 0
 %define candidate rc1
 %define version %{baseversion}~%{candidate}
@@ -133,6 +133,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Sat May 09 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.4-1
+- Bump for the official 1.4.4 release.
+
 * Mon May 06 2019 Evan Klitzke <evan@eklitzke.org> - 1.2-1
 - Bump to the official 1.2 release.
 
