@@ -11,7 +11,7 @@
 
 Name:    mu-mail
 Version: %{version}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -95,19 +95,19 @@ rm -f %{buildroot}%{_infodir}/dir
 rm -rf %{buildroot}
 
 %post -n emacs-mu4e
-/sbin/install-info %{_infodir}/mu4e.info.gz %{_infodir}/dir
+/usr/sbin/install-info %{_infodir}/mu4e.info.gz %{_infodir}/dir
 
 %preun -n emacs-mu4e
 if [ "$1" = 0 ]; then
-  /sbin/install-info --delete %{_infodir}/mu4e.info.gz %{_infodir}/dir
+  /usr/sbin/install-info --delete %{_infodir}/mu4e.info.gz %{_infodir}/dir
 fi
 
 %post guile
-/sbin/install-info %{_infodir}/mu-guile.info.gz %{_infodir}/dir
+/usr/sbin/install-info %{_infodir}/mu-guile.info.gz %{_infodir}/dir
 
 %preun guile
 if [ "$1" = 0 ]; then
-  /sbin/install-info --delete %{_infodir}/mu-guile.info.gz %{_infodir}/dir
+  /usr/sbin/install-info --delete %{_infodir}/mu-guile.info.gz %{_infodir}/dir
 fi
 
 %files
@@ -134,6 +134,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Wed Jul 15 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.10-2
+- Fix path to install-info for pre/post scripts
+
 * Wed Jul 15 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.10-1
 - rebuilt
 
