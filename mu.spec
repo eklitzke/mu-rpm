@@ -1,5 +1,5 @@
 %define guiledir %{_datadir}/guile/2.2
-%define baseversion 1.4.4
+%define baseversion 1.4.10
 %if 0
 %define candidate rc1
 %define version %{baseversion}~%{candidate}
@@ -11,7 +11,7 @@
 
 Name:    mu-mail
 Version: %{version}
-Release: 2%{?dist}
+Release: 1%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
@@ -134,6 +134,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Wed Jul 15 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.10-1
+- rebuilt
+
 * Sat May 09 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.4-2
 - Depend on info
 
