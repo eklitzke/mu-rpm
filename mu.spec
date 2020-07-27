@@ -1,22 +1,13 @@
 %define guiledir %{_datadir}/guile/2.2
-%define baseversion 1.4.10
-%if 0
-%define candidate rc1
-%define version %{baseversion}~%{candidate}
-%define versionurl %{baseversion}-%{candidate}
-%else
-%define version %{baseversion}
-%define versionurl %{baseversion}
-%endif
 
 Name:    mu-mail
-Version: %{version}
-Release: 2%{?dist}
+Version: 1.4.12
+Release: 1%{?dist}
 Summary: mu: maildir indexing service
 Group:   Applications/Internet
 License: GPL v3.0
 URL:     https://www.djcbsoftware.nl/code/mu/
-Source0: https://github.com/djcb/mu/archive/%{versionurl}.tar.gz
+Source0: https://github.com/djcb/mu/archive/%{version}.tar.gz
 
 Patch1:  0001-mu4e-doc-dir.patch
 Patch2:  0002-guile-installation-dir.patch
@@ -25,7 +16,6 @@ BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: emacs-nox
 BuildRequires: emacs-common
-BuildRequires: emacs-el
 BuildRequires: glibc-langpack-en
 BuildRequires: gcc-c++
 BuildRequires: gmime30-devel
@@ -68,7 +58,7 @@ Enhances:      %{name} = %{version}
 emacs support for mu
 
 %prep
-%setup -q -n mu-%{versionurl}
+%setup -q -n mu-%{version}
 %patch1 -p1
 %patch2 -p1
 
@@ -134,6 +124,9 @@ fi
 %{_infodir}/mu4e.info.gz
 
 %changelog
+* Mon Jul 27 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.12-1
+- Bump version to latest release
+
 * Wed Jul 15 2020 Evan Klitzke <evan@eklitzke.org> - 1.4.10-2
 - Fix path to install-info for pre/post scripts
 
